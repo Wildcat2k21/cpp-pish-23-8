@@ -1,3 +1,5 @@
+/build
+
 # Игнорируем исполнимые файлы
 *.exe
 *.out
@@ -15,7 +17,6 @@
 
 # Игнорируем файлы, связанные с системой сборки (например, Makefile, CMake)
 Makefile
-CMakeLists.txt
 
 # Игнорируем системные файлы macOS и Windows
 .DS_Store
