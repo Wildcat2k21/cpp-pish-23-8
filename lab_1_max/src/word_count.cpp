@@ -28,13 +28,17 @@ int count_bytes_in_file(const std::string& filename) {
 }
 
 int count_chars_in_file(const std::string& filename) {
-    std::ifstream file(filename);
+    std::ifstream file(filename, std::ios::binary);
     int char_count = 0;
-    char ch;
-    while (file.get(ch)) {
-        if (std::isalpha(ch)) {
+    unsigned char c;
+
+    while (file.read(reinterpret_cast<char*>(&c), 1)) {
+        // UTF-8: если первый байт символа — не continuation byte (10xxxxxx),
+        // значит, это начало нового символа
+        if ((c & 0xC0) != 0x80) {
             ++char_count;
         }
     }
+
     return char_count;
 }
