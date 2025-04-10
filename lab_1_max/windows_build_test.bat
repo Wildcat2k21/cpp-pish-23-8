@@ -3,47 +3,37 @@ chcp 65001 >nul
 setlocal enabledelayedexpansion
 
 :: Установка шрифта, чтобы консоль отображала UTF-8 корректно:
-:: Это на твой страх и риск — в GUI меняется шрифт cmd. Альтернатива — вручную в свойствах консоли.
 :: REG ADD "HKCU\Console" /v "FaceName" /t REG_SZ /d "Consolas" /f
 
-echo === Тест 1: Подсчет слов ===
-WordCount.exe "RandomText.txt" --words
-
 echo.
-echo === Тест 2: Подсчет строк ===
-WordCount.exe "RandomText.txt" --lines
-
-echo.
-echo === Тест 3: Подсчет символов ===
-WordCount.exe "RandomText.txt" --chars
-
-echo.
-echo === Тест 4: Комбинированный вызов: слова, строки, символы ===
-WordCount.exe "RandomText.txt" --words --lines --chars
-
-echo.
-echo === Тест 5: Смешанный порядок аргументов ===
-WordCount.exe --lines "RandomText.txt" --chars --words
-
-echo.
-echo === Тест 6: Некорректный путь к файлу ===
-WordCount.exe "nonexistent.txt" --words
-
-echo.
-echo === Тест 7: Пустой вызов ===
-WordCount.exe
-
-echo.
-echo === Тест 8: Только имя файла, без параметров ===
+echo === Тест 1: Один файл без параметров ===
+echo Команда: WordCount.exe "RandomText.txt"
 WordCount.exe "RandomText.txt"
 
 echo.
-echo === Тест 9: Только параметры, без файла ===
-WordCount.exe --words --lines
+echo === Тест 2: Несколько файлов без параметров ===
+echo Команда: WordCount.exe "RandomText.txt" "README.md"
+WordCount.exe "RandomText.txt" "README.md"
 
 echo.
-echo === Тест 10: Все три параметра без кавычек ===
-WordCount.exe RandomText.txt --words --lines --chars
+echo === Тест 3: Подсчёт слов и строк ===
+echo Команда: WordCount.exe --words --lines "RandomText.txt"
+WordCount.exe --words --lines "RandomText.txt"
+
+echo.
+echo === Тест 4: Подсчёт строк и байт ===
+echo Команда: WordCount.exe -l -c "RandomText.txt"
+WordCount.exe -l -c "RandomText.txt"
+
+echo.
+echo === Тест 5: Подсчёт слов, строк и байт (объединённые флаги) ===
+echo Команда: WordCount.exe -lwc "RandomText.txt" "README.md"
+WordCount.exe -lwc "RandomText.txt" "README.md"
+
+echo.
+echo === Тест 6: Перемешанные аргументы (флаги и файлы) ===
+echo Команда: WordCount.exe "RandomText.txt" "README.md" -lw --bytes
+WordCount.exe "RandomText.txt" "README.md" -lw --bytes
 
 echo.
 pause
