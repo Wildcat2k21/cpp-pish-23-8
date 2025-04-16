@@ -2,24 +2,6 @@
 #include <string>
 #include <algorithm>
 
-// оператор "меньше", сравнивает два числа побитно
-bool operator<(const uint2022_t& x, const uint2022_t& y) {
-    for (int i = uint2022_t::CAPACITY - 1; i >= 0; --i) {
-        if (x.data[i] < y.data[i]) return true;
-        if (x.data[i] > y.data[i]) return false;
-    }
-    return false;
-}
-
-// оператор "больше", сравнивает два числа побитно
-bool operator>(const uint2022_t& x, const uint2022_t& y) {
-    for (int i = uint2022_t::CAPACITY - 1; i >= 0; --i) {
-        if (x.data[i] > y.data[i]) return true;
-        if (x.data[i] < y.data[i]) return false;
-    }
-    return false;
-}
-
 // создаёт число из uint32_t
 uint2022_t from_uint(uint32_t index) {
     uint2022_t result;
@@ -124,6 +106,24 @@ uint2022_t operator%(const uint2022_t& lhs, const uint2022_t& rhs) {
     }
 
     return remainder;
+}
+
+// оператор "меньше", сравнивает два числа побитно
+bool operator<(const uint2022_t& x, const uint2022_t& y) {
+    for (int i = uint2022_t::CAPACITY - 1; i >= 0; --i) {
+        if (x.data[i] < y.data[i]) return true;
+        if (x.data[i] > y.data[i]) return false;
+    }
+    return false;
+}
+
+// оператор "больше", сравнивает два числа побитно
+bool operator>(const uint2022_t& x, const uint2022_t& y) {
+    for (int i = uint2022_t::CAPACITY - 1; i >= 0; --i) {
+        if (x.data[i] > y.data[i]) return true;
+        if (x.data[i] < y.data[i]) return false;
+    }
+    return false;
 }
 
 // проверяет равенство двух чисел
