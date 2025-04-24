@@ -1,5 +1,6 @@
 #include <lib/number.h>
 #include <iostream>
+#include <iomanip>
 
 int main() {
     // проверка вывода большого числа
@@ -35,6 +36,19 @@ int main() {
     std::cout << "a != b? " << (a != b ? "Yes" : "No") << std::endl;
     std::cout << "a < b? "  << (a < b  ? "Yes" : "No") << std::endl;
     std::cout << "a > b? "  << (a > b  ? "Yes" : "No") << std::endl;
+
+    // Кейс с переполнением
+    uint2022_t max_value;
+    for (int i = 0; i < uint2022_t::CAPACITY; ++i) {
+        max_value.data[i] = 0xFFFFFFFF;
+    }
+
+    std::cout << "\n=== ТЕСТ НА ПЕРЕПОЛНЕНИЕ ===" << std::endl;
+
+    std::cout << "\nЗначение max: " << max_value << std::endl;
+
+    uint2022_t two  = from_uint(4);
+    std::cout << "\nзначение max + 2: " << max_value + two << std::endl;
 
     return 0;
 }
